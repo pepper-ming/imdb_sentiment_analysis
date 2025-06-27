@@ -24,6 +24,7 @@ wheels/
 venv/
 env/
 ENV/
+.venv
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -57,3 +58,5 @@ Thumbs.db
 
 # Logs
 *.log
+
+.claude/
