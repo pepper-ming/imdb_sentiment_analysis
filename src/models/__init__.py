@@ -5,7 +5,6 @@
 - baseline: 傳統機器學習基線模型
 - deep_learning: 深度學習模型 (CNN, RNN, LSTM)
 - transformers: Transformer模型 (BERT, DistilBERT, RoBERTa)
-- ensemble: 集成學習方法
 
 主要類別：
 - BaselineModelManager: 傳統ML模型管理器
@@ -13,15 +12,27 @@
 - BiLSTM: 雙向長短期記憶網路
 - GRUClassifier: 門控循環單元分類器
 - DeepLearningModelManager: 深度學習模型管理器
+- DistilBERTClassifier: DistilBERT分類器
+- RoBERTaClassifier: RoBERTa分類器
+- TransformerTrainer: Transformer訓練器
+- TransformerModelManager: Transformer模型管理器
 """
 
 from .baseline import BaselineModelManager
 from .deep_learning import TextCNN, BiLSTM, GRUClassifier, DeepLearningModelManager
+from .transformers import (
+    DistilBERTClassifier, RoBERTaClassifier, 
+    TransformerTrainer, TransformerModelManager
+)
 
 __all__ = [
     'BaselineModelManager',
     'TextCNN',
     'BiLSTM', 
     'GRUClassifier',
-    'DeepLearningModelManager'
+    'DeepLearningModelManager',
+    'DistilBERTClassifier',
+    'RoBERTaClassifier',
+    'TransformerTrainer',
+    'TransformerModelManager'
 ]
