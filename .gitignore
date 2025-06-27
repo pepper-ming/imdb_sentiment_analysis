@@ -21,42 +21,43 @@ wheels/
 *.egg
 
 # Virtual Environment
+.venv/
 venv/
-env/
 ENV/
-.venv
+env/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Data files
-data/raw/*.csv
-data/raw/*.txt
-data/raw/*.json
-*.pkl
-*.h5
-
-# Model files
-models/*.h5
-models/*.pkl
-models/*.joblib
-
-# Results
-results/*.png
-results/*.jpg
-results/*.pdf
-
-# IDE
-.vscode/
+# PyCharm
 .idea/
-*.swp
-*.swo
+
+# VS Code
+.vscode/
+
+# 實驗和模型檔案
+experiments/models/*
+experiments/logs/*
+experiments/results/*
+!experiments/models/.gitkeep
+!experiments/logs/.gitkeep
+!experiments/results/.gitkeep
+
+# 資料檔案
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Weights & Biases
+wandb/
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
+# 其他
 *.log
-
-.claude/
+*.tmp
+*.swp
+*~
