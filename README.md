@@ -26,18 +26,50 @@ imdb_sentiment_analysis/
 - Scikit-learn
 - Matplotlib/Seaborn
 
-## 開始使用
+## 快速開始
 
-### 環境設置
+### 1. 環境設置
 ```bash
+# 自動安裝所有依賴並設置環境
+python setup.py
+
+# 或手動安裝
 pip install -r requirements.txt
 ```
 
-### 數據準備
-數據將從IMDB數據集獲取並預處理。
+### 2. 使用方式
 
-### 模型訓練
-詳細的訓練步驟將在notebooks中提供。
+#### 方式一：使用主腳本 (推薦)
+```bash
+# 數據預處理
+python main.py preprocess
 
-## 作者
-統計碩士深度學習專案
+# 訓練模型
+python main.py train --model simple_lstm --epochs 5
+
+# 預測文本
+python main.py predict --text "這部電影真的很棒！"
+```
+
+#### 方式二：使用獨立腳本
+```bash
+# 預測單個文本
+python predict.py --text "這部電影很無聊"
+
+# 互動模式預測
+python predict.py --interactive
+
+# 使用指定模型
+python predict.py --model models/simple_lstm_final.h5 --text "很棒的電影"
+```
+
+#### 方式三：使用Jupyter Notebook
+```bash
+jupyter notebook notebooks/01_data_exploration.ipynb
+```
+
+### 3. 支持的模型類型
+- `simple_lstm`: 簡單LSTM模型
+- `bidirectional_lstm`: 雙向LSTM模型  
+- `cnn`: 卷積神經網路模型
+- `cnn_lstm`: CNN+LSTM混合模型
