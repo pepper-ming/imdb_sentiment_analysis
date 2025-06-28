@@ -47,14 +47,16 @@ imdb_sentiment_analysis/
 - **scikit-learn**: 傳統機器學習
 
 ### 模型架構
-| 類型 | 模型 | 準確率 | 特點 |
-|------|------|--------|------|
-| 傳統ML | 邏輯回歸 + TF-IDF | ~80% | 快速基線 |
-| 傳統ML | SVM + TF-IDF | ~82% | 穩定性能 |
-| 深度學習 | TextCNN | ~85% | 卷積特徵提取 |
-| 深度學習 | BiLSTM | ~87% | 序列建模 |
-| Transformer | DistilBERT | ~91% | 輕量化BERT |
-| Transformer | RoBERTa | ~93% | 強化版BERT |
+| 類型 | 模型 | 目標準確率 | 特點 |
+|------|------|-----------|------|
+| 傳統ML | 邏輯回歸 + TF-IDF | 80%+ | 快速基線 |
+| 傳統ML | SVM + TF-IDF | 82%+ | 穩定性能 |
+| 深度學習 | TextCNN | 85%+ | 卷積特徵提取 |
+| 深度學習 | BiLSTM | 87%+ | 序列建模 |
+| Transformer | DistilBERT | 91%+ | 輕量化BERT |
+| Transformer | RoBERTa | 93%+ | 強化版BERT |
+
+> **注意**: 上述數值為預期目標，實際性能需要通過訓練和測試獲得。
 
 ## 🚀 快速開始
 
