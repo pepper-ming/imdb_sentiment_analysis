@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # IMDB情感分析API服務
+  sentiment-api:
+    build: .
+    container_name: imdb-sentiment-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=production
+    volumes:
+      # 掛載模型目錄（可選，用於持久化模型）
+      - ./experiments/models:/app/experiments/models
+      - ./experiments/logs:/app/experiments/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - sentiment-network
+
+  # Nginx反向代理（可選）
+  nginx:
+    image: nginx:alpine
+    container_name: imdb-sentiment-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - sentiment-api
+    networks:
+      - sentiment-network
+    profiles:
+      - production
+
+  # Redis快取（可選，用於API響應快取）
+  redis:
+    image: redis:alpine
+    container_name: imdb-sentiment-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - sentiment-network
+    profiles:
+      - production
+
+networks:
+  sentiment-network:
+    driver: bridge
+
+volumes:
+  redis-data:

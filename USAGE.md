@@ -393,6 +393,122 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker src.inference.api:app
 # 配置nginx.conf指向FastAPI服務
 ```
 
+## 🐳 Docker容器化部署
+
+### 基本Docker部署
+
+```bash
+# 1. 建置Docker鏡像
+docker build -t imdb-sentiment-api .
+
+# 2. 執行容器
+docker run -d \
+  --name sentiment-api \
+  -p 8000:8000 \
+  -v $(pwd)/experiments:/app/experiments \
+  imdb-sentiment-api
+
+# 3. 檢查容器狀態
+docker ps
+docker logs sentiment-api
+
+# 4. 測試API
+curl http://localhost:8000/health
+```
+
+### 使用Docker Compose
+
+```bash
+# 1. 啟動基本服務
+docker-compose up -d
+
+# 2. 啟動完整生產環境（包括Nginx和Redis）
+docker-compose --profile production up -d
+
+# 3. 檢查服務狀態
+docker-compose ps
+docker-compose logs sentiment-api
+
+# 4. 停止服務
+docker-compose down
+
+# 5. 重新建置並啟動
+docker-compose up --build -d
+```
+
+### 容器化配置選項
+
+**環境變數設定**:
+```bash
+# 在docker-compose.yml中設定或使用.env檔案
+PYTHONPATH=/app
+ENVIRONMENT=production
+MODEL_CACHE_DIR=/app/experiments/models
+LOG_LEVEL=INFO
+```
+
+**持久化儲存**:
+```yaml
+# docker-compose.yml中的volume設定
+volumes:
+  - ./experiments/models:/app/experiments/models    # 模型檔案
+  - ./experiments/logs:/app/experiments/logs        # 日誌檔案
+  - redis-data:/data                                # Redis資料
+```
+
+**擴展部署**:
+```bash
+# 水平擴展API服務
+docker-compose up --scale sentiment-api=3 -d
+
+# 使用負載平衡
+# 啟用Nginx profile進行負載分散
+docker-compose --profile production up -d
+```
+
+### 生產環境最佳實踐
+
+1. **安全性設定**:
+```bash
+# 使用非root用戶
+# 已在Dockerfile中實作：USER appuser
+
+# 限制容器資源
+docker run -d \
+  --name sentiment-api \
+  --memory=2g \
+  --cpus=1.0 \
+  -p 8000:8000 \
+  imdb-sentiment-api
+```
+
+2. **監控和日誌**:
+```bash
+# 查看即時日誌
+docker-compose logs -f sentiment-api
+
+# 檢查資源使用
+docker stats sentiment-api
+
+# 匯出日誌到檔案
+docker-compose logs sentiment-api > api.log
+```
+
+3. **備份和恢復**:
+```bash
+# 備份模型檔案
+docker run --rm \
+  -v sentiment_models:/data \
+  -v $(pwd):/backup \
+  alpine tar czf /backup/models_backup.tar.gz -C /data .
+
+# 恢復模型檔案
+docker run --rm \
+  -v sentiment_models:/data \
+  -v $(pwd):/backup \
+  alpine tar xzf /backup/models_backup.tar.gz -C /data
+```
+
 ## 📧 獲取支援
 
 如果遇到問題：

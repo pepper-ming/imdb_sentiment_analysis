@@ -1,0 +1,102 @@
+# Python相關
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虛擬環境
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# IDE和編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 作業系統檔案
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git相關
+.git/
+.gitignore
+
+# 日誌檔案
+*.log
+logs/
+
+# 快取檔案
+.cache/
+.pytest_cache/
+
+# Jupyter筆記本檢查點
+.ipynb_checkpoints/
+
+# 大型資料檔案
+data/raw/*.csv
+data/raw/*.zip
+data/raw/*.tar.gz
+*.h5
+*.pkl
+*.pickle
+
+# 模型檔案（保留本地訓練的模型）
+experiments/models/*.bin
+experiments/models/*.safetensors
+experiments/models/pytorch_model.bin
+
+# 測試覆蓋率報告
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+
+# 文檔建置
+docs/_build/
+
+# 臨時檔案
+*.tmp
+*.temp
+tmp/
+temp/
+
+# 環境配置檔案
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Docker相關
+docker-compose.override.yml
