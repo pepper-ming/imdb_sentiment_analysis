@@ -1,13 +1,13 @@
 """
-�!D
+訓練模組
 
-Л!���ܟ��
-- trainer: �x�!��h
-- loss: ꚩ1�x
-- metrics: U0
+提供各種模型的訓練功能，包括：
+- trainer: 訓練器類別
+- loss: 損失函數
+- metrics: 評估指標
 
-;�^%
-- DeepLearningTrainer: �x��h
+主要類別：
+- DeepLearningTrainer: 深度學習訓練器
 """
 
 from .trainer import DeepLearningTrainer

@@ -1,14 +1,14 @@
 """
-U0!D
+評估模組
 
-Лhb�!�U0�����
-- ^�
-- qoW',f
-- P���
-- !���
+提供模型評估相關功能，包括：
+- 準確率計算
+- 混淆矩陣生成
+- 分類報告
+- 模型比較
 
-;�^%
-- ModelEvaluator: !�U0h
+主要類別：
+- ModelEvaluator: 模型評估器
 """
 
 from .evaluator import ModelEvaluator
